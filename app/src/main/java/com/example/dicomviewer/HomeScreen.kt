@@ -31,8 +31,6 @@ fun HomeScreen() {
         contract = GetContent(),
         onResult = { uri: Uri? ->
             uri?.let {
-                // Handle the selected file URI (e.g., display its path or read its contents)
-                // For example: Log the URI or show it in the UI
                 println("Selected file URI: $uri")
             }
         }
@@ -57,7 +55,7 @@ fun HomeScreen() {
             Button(
                 onClick = {
                     // Open the file picker when the button is clicked
-                    filePickerLauncher.launch("application/dicom") // You can change MIME type if needed
+                    filePickerLauncher.launch("application/dicom")
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Black, // Button background color

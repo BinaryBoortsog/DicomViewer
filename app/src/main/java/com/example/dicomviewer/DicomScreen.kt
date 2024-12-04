@@ -104,9 +104,9 @@ fun ItemDetailScreen(itemId: String) {
                 modifier = Modifier.padding(vertical = 16.dp)
             )
 
-            // Item Image (This could be a placeholder or actual image if applicable)
+            // Item Image (This could be a placeholder or actual image )
             Image(
-                painter = painterResource(id = R.drawable.ic_launcher_foreground),  // Replace with an actual image resource
+                painter = painterResource(id = R.drawable.ic_launcher_foreground),
                 contentDescription = "Item Image",
                 modifier = Modifier
                     .fillMaxWidth()
@@ -127,7 +127,7 @@ fun ItemDetailScreen(itemId: String) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Additional Details (e.g., buttons, price, etc.)
+            // Additional Details ( buttons, price, etc.)
             Button(
                 onClick = { /* Handle any action */ },
                 modifier = Modifier

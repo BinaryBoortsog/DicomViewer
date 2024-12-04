@@ -62,7 +62,7 @@ fun SettingsScreen() {
                 )
             }
 
-            // Slider Example (e.g., Brightness)
+            // Slider Example ( Brightness)
             Column(modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp)) {
                 Text(
                     text = "Brightness",
