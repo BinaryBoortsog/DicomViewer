@@ -1,14 +1,10 @@
 package com.example.dicomviewer
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -22,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
+
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -39,7 +35,7 @@ fun DicomScreen(navController: NavController) {
                 .fillMaxSize()
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceBetween
+            verticalArrangement = Arrangement.Top
         ) {
             // Header
             Text(
@@ -50,39 +46,44 @@ fun DicomScreen(navController: NavController) {
                 modifier = Modifier.padding(vertical = 8.dp)
             )
 
-            // Lazy Grid with Clickable Items
-            LazyVerticalGrid(
-                columns = GridCells.Adaptive(100.dp),
-                content = {
-                    items(100) { index -> // Generates 100 items
-                        Box(
-                            modifier = Modifier
-                                .padding(8.dp)
-                                .fillMaxWidth()
-                                .aspectRatio(1f) // Makes the items square
-                                .clip(RoundedCornerShape(5.dp))
-                                .background(Color.Green)
-                                .clickable {
-                                    // Navigate to the details screen on item click
-                                    navController.navigate("itemDetail/$index")
-                                },
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(
-                                text = "Item $index",
-                                color = Color.White,
-                                fontSize = 12.sp
-                            )
-                        }
-                    }
+            // Lazy Grid with Clickable DICOM items (Using placeholders here)
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(10) { index -> // Generating 10 items as placeholders
+                    DicomItem(index = index, navController = navController)
                 }
-            )
+            }
         }
     }
 }
 
 @Composable
-fun ItemDetailScreen(itemId: String) {
+fun DicomItem(index: Int, navController: NavController) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+            .aspectRatio(1f) // Makes the items square
+            .clip(RoundedCornerShape(5.dp))
+            .background(Color.Gray)
+            .clickable {
+                // Navigate to the item details screen
+                navController.navigate("itemDetail/$index")
+            },
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = "DICOM Item $index",
+            color = Color.White,
+            fontSize = 12.sp
+        )
+    }
+}
+
+@Composable
+fun ItemDetailScreen(itemId: String?) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -97,17 +98,17 @@ fun ItemDetailScreen(itemId: String) {
         ) {
             // Item Title
             Text(
-                text = "Item Details: $itemId",
+                text = "DICOM Item Details: $itemId",
                 color = Color.White,
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(vertical = 16.dp)
             )
 
-            // Item Image (This could be a placeholder or actual image )
+            // Item Image (This could be an actual DICOM image or a placeholder)
             Image(
                 painter = painterResource(id = R.drawable.ic_launcher_foreground),
-                contentDescription = "Item Image",
+                contentDescription = "DICOM Item Image",
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp)
@@ -117,26 +118,13 @@ fun ItemDetailScreen(itemId: String) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Item Description
+            // Item Description (as a placeholder for DICOM details)
             Text(
-                text = "This is a detailed description of the item with ID: $itemId. It contains all the necessary information like usage, features, etc.",
+                text = "Detailed description of DICOM item with ID: $itemId. This could include metadata, patient info, etc.",
                 color = Color.White,
                 fontSize = 16.sp,
                 modifier = Modifier.padding(horizontal = 8.dp)
             )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            // Additional Details ( buttons, price, etc.)
-            Button(
-                onClick = { /* Handle any action */ },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp),
-                shape = RoundedCornerShape(10.dp)
-            ) {
-                Text(text = "View More", color = Color.White)
-            }
         }
     }
 }

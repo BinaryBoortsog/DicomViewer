@@ -63,13 +63,13 @@ fun Navigation(navController: NavHostController, paddingValues: PaddingValues) {
         modifier = Modifier.padding(paddingValues) // Apply padding directly to NavHost here
     ) {
         composable("home") {
-            HomeScreen()
+            HomeScreen(navController)  // Pass navController to HomeScreen
         }
         composable("dicom") {
-            DicomScreen(navController = navController)
+            DicomScreen(navController = navController) // Pass navController to DicomScreen
         }
         composable("settings") {
-            SettingsScreen()
+            SettingsScreen() // No need to pass navController here unless required
         }
     }
 }
